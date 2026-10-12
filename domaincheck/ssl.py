@@ -28,10 +28,18 @@ def _parse_date(s):
         return None
 
 
+def _norm_name(value):
+    """Нормализовать DN: openssl разных версий печатает 'CN = x' или 'CN=x'."""
+    return value.strip().replace(' = ', '=')
+
+
 def _parse_x509_cert(pem, timeout):
     """Распарсить один сертификат через openssl x509."""
     out, err = run_cmd(
-        ['openssl', 'x509', '-noout', '-subject', '-issuer', '-startdate', '-enddate', '-text'],
+        # -nameopt RFC2253: детерминированный формат DN без пробелов
+        # (по умолчанию часть версий openssl печатает 'CN = example.com')
+        ['openssl', 'x509', '-noout', '-subject', '-issuer', '-nameopt', 'RFC2253',
+         '-startdate', '-enddate', '-text'],
         timeout=timeout, input_text=pem)
     if err:
         return None
@@ -39,9 +47,9 @@ def _parse_x509_cert(pem, timeout):
     not_before = not_after = None
     for m in out.splitlines():
         if m.startswith('subject=') and subject is None:
-            subject = m[len('subject='):]
+            subject = _norm_name(m[len('subject='):])
         elif m.startswith('issuer=') and issuer is None:
-            issuer = m[len('issuer='):]
+            issuer = _norm_name(m[len('issuer='):])
         elif m.startswith('notBefore='):
             not_before = _parse_date(m[len('notBefore='):])
         elif m.startswith('notAfter='):

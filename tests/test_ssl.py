@@ -43,6 +43,14 @@ class ParseChainTest(unittest.TestCase):
         self.assertIsNotNone(chain[0]['not_after'])
         self.assertIsInstance(chain[0]['days_until_expiry'], int)
 
+    def test_x509_space_eq_normalized(self):
+        # openssl части версий печатает 'CN = x' (с пробелами) — парсер нормализует
+        out = X509_OUT.replace('subject=CN=mnnoee.ru', 'subject=CN = mnnoee.ru')
+        with mock.patch('domaincheck.ssl.run_cmd', return_value=(out, None)):
+            info = ssl._parse_x509_cert('-----BEGIN CERTIFICATE-----', timeout=5)
+        self.assertEqual(info['subject'], 'CN=mnnoee.ru')
+        self.assertEqual(info['issuer'], 'C=US, O=Example Org, CN=Example CA')
+
 
 class ParseVerifyTest(unittest.TestCase):
     def test_ok(self):
