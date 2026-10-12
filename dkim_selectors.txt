@@ -1,0 +1,20 @@
+# DKIM-селекторы для перебора (по одному на строку, # — комментарий)
+# Используется по умолчанию, если не передан --dkim-selector или --dkim-file
+#
+# Известные селекторы в зависимости от DNS-провайдера / Почты:
+#   default   — стандартный для многих хостингов
+#   google    — Google Workspace / G Suite
+#   selector1 — Microsoft 365 / Exchange Online
+#   selector2 — Microsoft 365 / Exchange Online (2-й ключ)
+#   s1        — Maurer,-US, GoDaddy, MailChannels
+#   s2        — Maurer,US, GoDaddy (2-й ключ)
+#   k1        — Hey.com, Fastmail
+#   mail      — распространённый вариант
+default
+google
+selector1
+selector2
+s1
+s2
+k1
+mail

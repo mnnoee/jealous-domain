@@ -1,0 +1,16 @@
+% TCI Whois Service. Terms of use:
+% https://tcinet.ru/documents/whois_ru_rf.pdf (in Russian)
+% https://tcinet.ru/documents/whois_su.pdf (in Russian)
+
+domain:        EXAMPLE.RU
+state:         REGISTERED, NOT DELEGATED, VERIFIED
+person:        Private Person
+registrar:     RU-CENTER-RU
+admin-contact: https://www.nic.ru/whois
+created:       2000-04-20T13:08:22Z
+paid-till:     2027-04-30T21:00:00Z
+free-date:     2027-06-01
+source:        TCI
+
+Last updated on 2026-09-15T11:43:01Z
+
