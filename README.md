@@ -32,8 +32,10 @@ expire?", "when does the certificate expire?", "is DNS in order?".
 
 ## Install
 
+Not on PyPI yet (planned). Install straight from GitHub:
+
 ```bash
-pip install jealous-domain
+pip install git+https://github.com/mnnoee/jealous-domain.git
 ```
 
 Or run straight from a clone:

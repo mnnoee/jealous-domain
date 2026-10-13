@@ -19,8 +19,10 @@
 
 ## Установка
 
+Пока не на PyPI (публикация планируется). Ставится напрямую с GitHub:
+
 ```bash
-pip install jealous-domain
+pip install git+https://github.com/mnnoee/jealous-domain.git
 ```
 
 После установки доступна команда `jealous-domain`. Можно запускать и без
